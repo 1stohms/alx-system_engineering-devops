@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Kills the `4-to_infinity_and_beyond` process initiated in another terminal
+# Kills the 4-to_infinity_and_beyond process
 
-# shellcheck disable=SC2009
-i="$(pgrep -x bash | tail -3 | head -1)"
-kill "$i"
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
