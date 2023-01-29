@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
-#create /var/run/myscript.pid
-sudo touch /var/run/myscript.pid
-#containing its PID
-sudo bash -c 'echo "$$" > /var/run/myscript.pid'
-#Displays To infinity and beyond
+# script that creates a file containing its PID
+
+function del(){
+    rm /var/run/myscript.pid
+}
+
+trap 'echo I hate the kill command;del' SIGTERM
+trap "echo Y U no love me?!;del" SIGINT
+
+echo $$ >> /var/run/myscript.pid
 while true
 do
-	echo "To infinity and beyond"
-	sleep 2
-	trap 'echo "I hate the kill command"; sudo rm /var/run/myscript.pid; exit' SIGTERM
-	trap 'echo "Y U no love me?!"'  SIGINT
-	trap 'sudo rm /var/run/myscript.pid; exit' SIGQUIT
+    echo "To infinity and beyond"
+    sleep 1
 done
